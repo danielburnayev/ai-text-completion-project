@@ -6,9 +6,24 @@ client = InferenceClient(
     api_key=os.environ["COG_AI_TEXT_COMP_TOKEN"],
 )
 
-result = client.summarization(
-    "The tower is 324 metres (1,063 ft) tall, about the same height as an 81-storey building, and the tallest structure in Paris. Its base is square, measuring 125 metres (410 ft) on each side. During its construction, the Eiffel Tower surpassed the Washington Monument to become the tallest man-made structure in the world, a title it held for 41 years until the Chrysler Building in New York City was finished in 1930. It was the first structure to reach a height of 300 metres. Due to the addition of a broadcasting aerial at the top of the tower in 1957, it is now taller than the Chrysler Building by 5.2 metres (17 ft). Excluding transmitters, the Eiffel Tower is the second tallest free-standing structure in France after the Millau Viaduct.",
-    model="facebook/bart-large-cnn",
-)
+def prompt_user():
+    while True:
+        response = input("Welcome to the free AI Text Companion!")
+        get_ai_response(response)
 
-print(result.summary_text)
+def get_ai_response(person_response):
+    completion = client.chat.completions.create(
+        model="sarvamai/sarvam-m",
+        #model="meta-llama/Meta-Llama-3-8B",
+        messages=[
+            {
+                "role": "user",
+                "content": person_response
+            }
+        ],
+    )
+
+    print(completion.choices[0].message.content)
+
+if __name__ == "__main__":
+    prompt_user()

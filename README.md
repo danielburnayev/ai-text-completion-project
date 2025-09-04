@@ -2,7 +2,7 @@
 
 ## Setup
 Make sure you make the following installations in your command line interface before running the following code:
-`pip install os
+`pip install os;
 pip install huggingface_hub`
 This would install the os and huggingface_hub packages for you, which will be used in this text_completion_app.py file
 
